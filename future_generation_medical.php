@@ -4,9 +4,8 @@
 // written by Yang Yang in Dec, 2015
 
 
-include("./db_obj.php");
-include("./db_function.php");
-include("./validation_function.php");
+include("./db_function.php");  // MySQL view, query, trriger and so on.
+include("./validation_function.php");  // functions to check validations, like password pattern.
 
 $action = $_POST['action'];
 $page = "";
