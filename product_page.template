@@ -1,19 +1,19 @@
 <?php
+// this is the template for product page, this page will show all the products in the Database, so you can pick up the items and put them in your shopping cart.
 
-include("db_obj.php");
-	
+// if you have login, show your name.	
 session_start();
 $username = "";
-// set offset and num_of_items
-$num_of_items = 10;
-$offset = 0;
-//echo "pro page:".$_SESSION['offset'];
+
+// we only show 10 items each page, set offset and num_of_items.
+$num_of_items = 10; // num of items on each page.
+$offset = 0; // mark to know which 10 items the website is showing.
+
 if (isset($_SESSION['username'])) {
 	$username = $_SESSION['username'];
 }
 if (isset($_SESSION['offset'])) {
 	$offset = $_SESSION['offset'];
-		//echo "re set pro page:".$offset;
 }
 // init Database info
 $db_host = "50.62.209.83:3306";
@@ -31,16 +31,17 @@ if (mysql_error()) {
 }
 //select DB
 mysql_select_db($db_name, $db_con);
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/product_page.css">
 </head>
 <body>
-<div class="">
-<h2><center> Welcome to Future Generation Medical</center></h2>
+	<div class="">
+	<h2><center> Welcome to Future Generation Medical</center></h2>
+
 <?php
 // header.php
 include("header.php");
@@ -62,44 +63,21 @@ include("header.php");
 	</ul>
 	</div>
 
-<section  class="main">
-	<div>
-	<center>
-	<h3>   <?php if ($username != "") {echo "Dear ".$username.", ";} ?> Welcome to Future Generation Medical! </h3> 
-	<h3> You can see product's details here.</h3>
-	<h3>List products info here </h3>
+	<section  class="main">
+		<div><center>
+		<h3>   <?php if ($username != "") {echo "Dear ".$username.", ";} ?> Example Website </h3> 
 
-	<div class="search">
-		<form name="ProductSearchForm" method="POST" action="future_generation_medical.php">
+		<div class="search">
+			<form name="ProductSearchForm" method="POST" action="future_generation_medical.php">
 			<input type="hidden" name="action" value="product"/>
 			<input type="textfield" name="search" value=""/>
 			<input type="submit" name="button" value="Search"/>
-		</form>		
-	</div>
-	</center>
+			</form>	
+		</div>
+		</div></center>
+	
 	<?php
-	
-	//echo "num of item--". $num_of_items."--";
-	//echo "offset--". $offset."--";
-	
-	// search product info from tb prodcut.
-	$query = array(); // query is an array.
-	session_start();
-	if (isset($_SESSION['search'])) {
-		$search = $_SESSION['search'];
-		// divide search info into some strings and store in the array.
-		$search = explode(" ", $search);
-		foreach ($search as $part_search) {
-			$offset = 0; // start search first time. re-set offset.
-			array_push($query, "SELECT * FROM product WHERE product_name LIKE '%$part_search%' LIMIT $num_of_items OFFSET $offset");
-		}
-		unset($_SESSION['search']);
-	}
-	else {
-		$offset = 0; // not match result show all products.
-		$query[0] = "SELECT * FROM product LIMIT $num_of_items OFFSET $offset";
-	}
-	// execute all queries.
+	// select items from Database.
 	foreach ($query as $each_query) {
 		$result = mysql_query($each_query) or die($each_query."<br/><br/>".mysql_error());
 		// count nb of row.
@@ -114,9 +92,8 @@ include("header.php");
   			<div class="container">
   			<form name="<?php echo "Product".$row["product_id"]."Form"; ?>" method="POST" 			action="future_generation_medical.php"></td>
   			<input type="hidden" name="action" value="product"/>
-    			
     		
-    			<button type="submit" name="button" value="see details"><img src="./img/medicine.jpg" height="100" width="100"></button>
+    			<button type="submit" name="button" value="see details"><img src="./img/example.jpg" height="100" width="100"></button>
     			<span class="pro_text"><?php echo $row["product_name"]; ?></span>
     			<input type="hidden" name="pro_id" value="<?php echo $row["product_id"]; ?>"/>
     			
@@ -131,15 +108,13 @@ include("header.php");
 		}
 		?>	
 	<?php
-	} // foreach }
+		} // foreach 
+	}
 	// close db_connection.
 	mysql_close($db_con);
-	
-	
 	?>
 	
-	
-	<form name="ProductControlForm" method="POST" action="future_generation_medical.php">
+	<form name="ProductControlForm" method="POST" action="Main_Controller.php">
 		<input type="hidden" name="action" value="product"/>
 		<p><center>
 		<input type="submit" name="button" value="previous"/> <tr>
