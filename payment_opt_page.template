@@ -1,4 +1,6 @@
 <?php
+// this is a simple example page for payment, you can change or delete it as you demands.
+
 session_start();
 $username = "";
 if (isset($_SESSION['username'])) {
@@ -6,30 +8,26 @@ if (isset($_SESSION['username'])) {
 	$opt_pay = $_SESSION['opt_pay'];
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <body>
-<div class="">
-<h2> Welcome to Future Generation Medical</h2>
+	<div class="">
+	<h2> Example Website </h2>
 <?php
 // header.php
 include("header.php");
 ?>
-<p>
 
-<form name="Payment_Opt_Form" method="POST" action="">
+	<form name="Payment_Opt_Form" method="POST" action="">
 
 	<input type="hidden" name="action" value="payment_opt"/>
-
 	<h3>Dear <?php echo $username; ?>, Please check out here! </h3> 
 	<h3>You select <?php echo $opt_pay."<br>"; ?> to pay</h3>
 	<input type="submit" name="button" value="Pay"/> <tr>
         <input type="submit" name="button" value="Cancel"/> <tr>
 
-
-
-</form>
-
-</div>
+	</form>
+	</div>
 </body>
 </html>
