@@ -1,4 +1,5 @@
 <?php
+// this is the template for the login page.
 
 // first time login, destroy all sessions.
 session_start();
@@ -10,7 +11,7 @@ session_destroy();
 <html>
 <body>
 <div class="">
-<h2><center>Welcome to Future Generation Medical</center></h2>
+<h2><center>Example Website</center></h2>
 
 <?php
 // header.php
