@@ -16,12 +16,8 @@ include("header.php");
 	        Username: <tr><input type="textfield" name="username"/><br><p>
 	        Password: <tr><input type="password" name="password"/><br><p>
 	        Repeat Password: <tr><input type="password" name="re_password"/><br><p>
-	        Company Name: <input type="textfield" name="company"/><br><p>
-	        Company Address: <input type="textfield" name="comp_addr"/><br><p>
-	        Assigned Person: <input type="textfield" name="assign"/><br><p>
-	        Position: <input type="textfield" name="position"/><br><p>
-	        Contact Phone Number: <input type="textfield" name="phone"/><br><p>
-	        Company E-mail: <input type="textfield" name="comp_email"/><br><p>
+	        Phone Number: <input type="textfield" name="phone"/><br><p>
+	        E-mail: <input type="textfield" name="comp_email"/><br><p>
 	        <input type="submit" name="button" value="register"/>
 	        <input type="submit" name="button" value="back to login"/>
 	        
