@@ -16,10 +16,10 @@ if (isset($_SESSION['offset'])) {
 	$offset = $_SESSION['offset'];
 }
 // init Database info
-$db_host = "50.62.209.83:3306";
-$db_name = "FGM";
+$db_host = "10.75.105.83:8888";
+$db_name = "Example";
 $db_user = "yangyang";
-$db_password = "Fgm_sql";
+$db_password = "example";
 // inti DB connection
 $db_con = "";
 
