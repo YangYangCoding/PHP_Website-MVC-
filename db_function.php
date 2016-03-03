@@ -5,10 +5,10 @@
 // insert the selected products into tb product_selected
 function insert_user_select_product_info($usr, $pro_id, $pro_quan)  {
 	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
+	$db_host = "10.75.105.83:8888";
+	$db_name = "Example";
 	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
+	$db_password = "example";
 	// inti DB connection
 	$db_con = "";
 
@@ -34,10 +34,10 @@ function insert_user_select_product_info($usr, $pro_id, $pro_quan)  {
 // get total number of lines in tb product
 function num_of_lines_product() {
 	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
+	$db_host = "10.75.105.83:8888";
+	$db_name = "Example";
 	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
+	$db_password = "example";
 	// inti DB connection
 	$db_con = "";
 
@@ -65,10 +65,10 @@ function num_of_lines_product() {
 // insert register info into DB.
 function insert_register_info($usr, $pwd, $comp, $comp_addr, $assi, $pos, $pho, $comp_e) {
 	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
+	$db_host = "10.75.105.83:8888";
+	$db_name = "Example";
 	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
+	$db_password = "example";
 	// inti DB connection
 	$db_con = "";
 
@@ -89,10 +89,10 @@ function insert_register_info($usr, $pwd, $comp, $comp_addr, $assi, $pos, $pho, 
 // check login info validation
 function login_validation($usr, $pwd) {
 	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
+	$db_host = "10.75.105.83:8888";
+	$db_name = "Example";
 	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
+	$db_password = "example";
 	// inti DB connection
 	$db_con = "";
 
