@@ -1,30 +1,6 @@
 <?php
 
-// this file contains all the db functions that main controller(future_generation_medical.php) needs.
-
-// remove an added item from tb product_selected
-function delete_added_item($usr, $pro_id, $pro_date) {
-	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
-	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
-	// inti DB connection
-	$db_con = "";
-
-	// connect to db
-	$db_con = @mysql_connect($db_host,$db_user,$db_password);
-	// Check connection
-	if (mysql_error()) {
-		die("Failed to connect to MySQL using the PHP mysql extension: " . mysql_error());
-	}
-	//select DB
-	mysql_select_db($db_name, $db_con);
-	$query = "DELETE FROM product_selected WHERE username = '$usr' AND product_id = '$pro_id' AND date = '$pro_date'";
-	$result = mysql_query($query) or die($query."<br/><br/>".mysql_error());
-	// close db_connection.
-	mysql_close($db_con);
-}
+// this file contains all the db functions that main controller(Main_Conroller.php) needs.
 
 // insert the selected products into tb product_selected
 function insert_user_select_product_info($usr, $pro_id, $pro_quan)  {
@@ -86,96 +62,6 @@ function num_of_lines_product() {
 	
 }
 
-// get selected item info names. Return an array contains items' names.
-function get_selected_item_info($usr) {
-	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
-	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
-	// inti DB connection
-	$db_con = "";
-
-	// connect to db
-	$db_con = @mysql_connect($db_host,$db_user,$db_password);
-	// Check connection
-	if (mysql_error()) {
-		die("Failed to connect to MySQL using the PHP mysql extension: " . mysql_error());
-	}
-	//select DB
-	mysql_select_db($db_name, $db_con);
-	
-	// search product the username selected from tb prodcut_selected..
-	
-	$query = "SELECT * FROM product_selected WHERE username = '$usr'";
-	$result = mysql_query($query) or die($query."<br/><br/>".mysql_error());
-	$item_selected = array();
-	while($row = mysql_fetch_array($result)) {
-		$item_selected[$row["product_id"]] = $row["quantity"]."~".$row["date"];
-    	}
-    	//print_r ($item_selected);
-    	// close db_connection.
-	mysql_close($db_con);
-    	return $item_selected;
-}
-
-// check payment options of a user
-function payment_option_info($usr) {
-	$opt = array();
-	$opt[0] = 0;
-	$opt[1] = 0;
-	$opt[2] = 0;
-	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
-	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
-	// inti DB connection
-	$db_con = "";
-
-	// connect to db
-	$db_con = @mysql_connect($db_host,$db_user,$db_password);
-	// Check connection
-	if (mysql_error()) {
-		die("Failed to connect to MySQL using the PHP mysql extension: " . mysql_error());
-	}
-	//select DB
-	mysql_select_db($db_name, $db_con);
-	
-	// search payment option.
-	// search credit tb first.
-	$query = "SELECT * FROM pay_credit WHERE username = '$usr'";
-	$result = mysql_query($query) or die($query."<br/><br/>".mysql_error());
-	// put result into opt array
-	$num_rows = mysql_num_rows($result);
-	if ($num_rows > 0) {
-		$opt[0] = 1;
-	}
-	
-	//search check tb second.
-	$query = "SELECT * FROM pay_check WHERE username = '$usr'";
-	$result = mysql_query($query) or die($query."<br/><br/>".mysql_error());
-	// put result into opt array
-	$num_rows = mysql_num_rows($result);
-	if ($num_rows > 0) {
-		$opt[1] = 1;
-	}
-
-	//search paypal tb thirdly
-	$query = "SELECT * FROM pay_paypal WHERE username = '$usr'";
-	$result = mysql_query($query) or die($query."<br/><br/>".mysql_error());
-	// put result into opt array
-	$num_rows = mysql_num_rows($result);
-	if ($num_rows > 0) {
-		$opt[2] = 1;
-	}
-	// close db_connection.
-	mysql_close($db_con);
-	
-	return $opt;
-}
-
-
 // insert register info into DB.
 function insert_register_info($usr, $pwd, $comp, $comp_addr, $assi, $pos, $pho, $comp_e) {
 	// init Database info
@@ -230,12 +116,7 @@ function login_validation($usr, $pwd) {
 	$num_rows = mysql_num_rows($result);
 	//check $result, if only one line found, ture.
 	if ($num_rows == 1) {
-		if ($temp == 0) {
-			return 1; // finish verify ID, and account, pwd are both right
-		}
-		elseif ($temp == 1) {
-			return 1; // still during verify ID process
-		}
+		return 1; // account and pwd are all right.
 	}
 	else {
 		return 0; // account or pwd wrong.
@@ -243,49 +124,21 @@ function login_validation($usr, $pwd) {
 	
 }
 
-
 // edit customer account information.
 function edit_account_info($usr, $comp, $comp_addr, $assi, $pos, $pho, $comp_e) {
-	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
-	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
-	// inti DB connection
-	$db_con = "";
-
-	// connect to db
-	$db_con = @mysql_connect($db_host,$db_user,$db_password);
-	// Check connection
-	if (mysql_error()) {
-		die("Failed to connect to MySQL using the PHP mysql extension: " . mysql_error());
-	}
-	//select DB
-	mysql_select_db($db_name, $db_con);
-	//setup query to check validation.
-	$query = "UPDATE customer SET company_name='$comp', comp_addr='$comp_addr', assign='$assi', position='$pos', phone_num='$pho', email_addr='$comp_e' WHERE username='$usr'";
-	$result = mysql_query($query) or die($query."<br/><br/>".mysql_error());
+	// change(edit) your account info, you can delete or change it as your demands.
+	// try it by yourself...
 }
 
 function change_password($usr, $pwd) {
-	// init Database info
-	$db_host = "50.62.209.83:3306";
-	$db_name = "FGM";
-	$db_user = "yangyang";
-	$db_password = "Fgm_sql";
-	// inti DB connection
-	$db_con = "";
-
-	// connect to db
-	$db_con = @mysql_connect($db_host,$db_user,$db_password);
-	// Check connection
-	if (mysql_error()) {
-		die("Failed to connect to MySQL using the PHP mysql extension: " . mysql_error());
-	}
-	//select DB
-	mysql_select_db($db_name, $db_con);
-	//setup query to check validation.
-	$query = "UPDATE customer SET password='$pwd' WHERE username='$usr'";
-	$result = mysql_query($query) or die($query."<br/><br/>".mysql_error());
+	// change your account password, you can delete or change it as your demands.
+	// try it by yourself...
 }
+
+// remove an added item from tb product_selected
+function delete_added_item($usr, $pro_id) {
+	// it is a example function, you can change it or delete it as your demands.
+	// try it by yourself...
+}
+
 ?>
