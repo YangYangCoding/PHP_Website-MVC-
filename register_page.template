@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<div class="">
+<h2> Register to join Future Generation Medical </h2>
+<?php
+// header.php
+include("header.php");
+?>
+<p>
+
+<form name="registerForm" method="POST" action="">
+
+	<input type="hidden" name="action" value="register"/>
+	
+    
+        Username: <tr><input type="textfield" name="username"/><br><p>
+        Password: <tr><input type="password" name="password"/><br><p>
+        Repeat Password: <tr><input type="password" name="re_password"/><br><p>
+        Company Name: <input type="textfield" name="company"/><br><p>
+        Company Address: <input type="textfield" name="comp_addr"/><br><p>
+        Assigned Person: <input type="textfield" name="assign"/><br><p>
+        Position: <input type="textfield" name="position"/><br><p>
+        Contact Phone Number: <input type="textfield" name="phone"/><br><p>
+        Company E-mail: <input type="textfield" name="comp_email"/><br><p>
+        <input type="submit" name="button" value="register"/>
+        <input type="submit" name="button" value="back to login"/>
+
+
+
+
+</form>
+    
+
+</div>
+</body>
+</html>

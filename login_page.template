@@ -1,0 +1,34 @@
+<?php
+
+// first time login, destroy all sessions.
+session_start();
+session_destroy();
+
+?>
+
+<!DOCTYPE html>
+<html>
+<body>
+<div class="">
+<h2><center>Welcome to Future Generation Medical</center></h2>
+
+<?php
+// header.php
+include("header.php");
+?>
+<p>
+<div>
+<center>
+<form name="loginForm" method="POST" action="">
+
+	<input type="hidden" name="action" value="login"/>
+	
+        Username<tr><input type="textfield" name="username"/><br><p>
+        Password<tr><input type="textfield" name="password"/><br><p>
+        <input type="submit" name="button" value="login"/> <tr>
+        <input type="submit" name="button" value="register"/>
+</form>
+</center>
+</div>
+</body>
+</html>
